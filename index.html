@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Winston</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  </head>
+  <header>
+    <h1>Winston Palace</h1>
+    <nav>
+      <ul>
+        <li><a href="#">ArtStation</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Itch</a></li>
+      </ul>
+    </nav>
+  </header>
+  <body>
+    <script src="js/three.js"></script>
+		<script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( renderer.domElement );
+
+      const geometry = new THREE.BoxGeometry();
+      const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+      const cube = new THREE.Mesh( geometry, material );
+      scene.add( cube );
+
+      camera.position.z = 5;
+
+      document.addEventListener('keydown', event => {
+        if (event.code === 'KeyD') {
+          cube.position.x = cube.position.x + (1 - cube.position.x) * 0.1 ;
+        }
+        if (event.code === 'KeyA') {
+          cube.position.x -= 0.1;
+          animate();
+        }
+        if (event.code === 'Space') {
+          camera.position.y += 0.1;
+        }
+      })
+
+      function animate() {
+	       requestAnimationFrame( animate );
+	        renderer.render( scene, camera );
+        }
+      animate();
+		</script>
+  </body>
+</html>
